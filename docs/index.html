@@ -21,10 +21,16 @@
         <p class="lead">Личные Plus и Pro предложения. Точная цена после выбора тарифа, продажи и возвраты — в одной таблице.</p>
       </div>
       <div class="hero-actions">
-        <a class="export-button" href="chatgpt_tariffs.xlsx" download>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
-          Выгрузить в Excel
-        </a>
+        <div class="action-row">
+          <a class="refresh-button" href="https://github.com/VasilyPorsev/PlatiMarket/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer" title="Откроется GitHub Actions — нажмите Run workflow">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 8.5A7 7 0 0 1 18.5 7M5.5 17A7 7 0 0 0 18 15.5"/></svg>
+            Обновить
+          </a>
+          <a class="export-button" href="chatgpt_tariffs.xlsx" download>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+            Выгрузить в Excel
+          </a>
+        </div>
         <p id="updated" class="updated">Обновление данных…</p>
       </div>
     </header>
