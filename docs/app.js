@@ -175,6 +175,7 @@ async function refreshFromPlati() {
     const pro = results.flatMap(item => item.pro ? [item.pro] : []).sort((a, b) => a.price - b.price);
     state.data = { plus, pro, updated_at: new Date().toISOString() };
     updated.textContent = `Обновлено ${new Date().toLocaleString("ru-RU")}`;
+    document.querySelector("#loading")?.remove();
     render();
   } catch (error) {
     updated.textContent = `Ошибка обновления: ${error.message}`;
@@ -220,4 +221,5 @@ fetch("data.json", { cache: "no-store" })
     document.querySelector("#loading").remove();
     render();
   })
-  .catch(error => { document.querySelector("#loading").textContent = `Не удалось загрузить данные: ${error.message}`; });
+  .catch(error => { document.querySelector("#loading").textContent = `Локальные данные недоступны: ${error.message}`; })
+  .finally(refreshFromPlati);
