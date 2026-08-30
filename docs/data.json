@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30T09:27:22+00:00",
+  "updated_at": "2026-08-30T09:43:10+00:00",
   "plus": [
     {
       "url": "https://plati.market/itm/3725372",
@@ -349,7 +349,7 @@
       "url": "https://plati.market/itm/3636620",
       "seller": "hmmml",
       "tariff": "2. 24/7 АВТО | ChatGPT Plus НА 1 МЕСЯЦ (персональный аккаунт + почта)",
-      "sold": 26654,
+      "sold": 26655,
       "returns": 152,
       "price": 1999.0
     },
@@ -440,14 +440,6 @@
       "sold": ">100",
       "returns": 0,
       "price": 2183.0
-    },
-    {
-      "url": "https://plati.market/itm/5577477",
-      "seller": "accountstore4u",
-      "tariff": "Chatgpt plus 1 months",
-      "sold": 518,
-      "returns": 0,
-      "price": 2186.0
     },
     {
       "url": "https://plati.market/itm/5849306",
@@ -939,22 +931,6 @@
     }
   ],
   "pro": [
-    {
-      "url": "https://plati.market/itm/5422669",
-      "seller": "SpicyCheeze",
-      "tariff": "1 - Месяц | PRO | Без Gemini",
-      "sold": 467,
-      "returns": 1,
-      "price": 170.0
-    },
-    {
-      "url": "https://plati.market/itm/5979732",
-      "seller": "LevelX DZ",
-      "tariff": "ChatGPT Pro 1 месяц – Совместный аккаунт | Безопасный и надёжный доступ",
-      "sold": 1,
-      "returns": 0,
-      "price": 1104.0
-    },
     {
       "url": "https://plati.market/itm/4125885",
       "seller": "Будни Дизайнера",
@@ -1511,7 +1487,7 @@
       "url": "https://plati.market/itm/3636620",
       "seller": "hmmml",
       "tariff": "4. ChatGPT PRO X5 НА 1 МЕСЯЦ (персональный аккаунт + почта)",
-      "sold": 26654,
+      "sold": 26655,
       "returns": 152,
       "price": 14999.0
     },

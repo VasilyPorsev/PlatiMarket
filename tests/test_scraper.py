@@ -68,3 +68,14 @@ def test_rejects_any_common_word_in_description():
 def test_pro_requires_explicit_tariff_option():
     product = Product(1, "https://example.test/item", "seller", Decimal("1000"), "ChatGPT Pro 5x")
     assert parse_pro_tariff("<title>ChatGPT Pro 5x на 1 месяц</title>", product) is None
+
+
+def test_rejects_joint_tariff_and_description():
+    product = Product(1, "https://example.test/item", "seller", Decimal("1000"), "ChatGPT")
+    tariff_html = '<label class="chips__label"><span class="body-regular">ChatGPT Plus — совместный</span></label>'
+    description_html = """
+    <label class="chips__label"><span class="body-regular">ChatGPT Plus личный</span></label>
+    <div id="description-tab-content">Совместный доступ также доступен.</div>
+    """
+    assert parse_plus_tariff(tariff_html, product) is None
+    assert parse_plus_tariff(description_html, product) is None

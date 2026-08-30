@@ -19,10 +19,11 @@ PRODUCT_DATA_URL = "https://api.digiseller.com/api/products/{product_id}/data"
 PRICE_RE = re.compile(r"([+-]?)\s*([\d\s\u00a0.,]+)\s*(?:₽|руб)", re.IGNORECASE)
 PLUS_RE = re.compile(r"(?<![\w])(?:chat\s*gpt|chatgpt)?\s*plus(?![\w])", re.IGNORECASE)
 PRO_RE = re.compile(r"(?<![\w])pro(?:\s*\d+x)?(?![\w])", re.IGNORECASE)
-SHARED_RE = re.compile(r"(?<![\w])(?:общ\w*|shared|public)(?![\w])", re.IGNORECASE)
+SHARED_RE = re.compile(r"(?<![\w])(?:общ\w*|совместн\w*|shared|public)(?![\w])", re.IGNORECASE)
 SHARED_DESCRIPTION_RE = re.compile(
     r"(?:"
     r"(?<![\w])общ(?:ая|ий)(?![\w])"
+    r"|(?<![\w])совместн\w*(?![\w])"
     r"|"
     r"(?:общ\w*|публичн\w*)\s+(?:\([^)]*\)\s*)?(?:аккаунт\w*|уч[её]тн\w*\s+запис\w*)"
     r"|(?:аккаунт\w*|уч[её]тн\w*\s+запис\w*)\s+(?:общ\w*|публичн\w*)"
