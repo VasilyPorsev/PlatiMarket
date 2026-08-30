@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30T09:23:32+00:00",
+  "updated_at": "2026-08-30T09:25:37+00:00",
   "plus": [
     {
       "url": "https://plati.market/itm/3725372",
@@ -939,6 +939,14 @@
     }
   ],
   "pro": [
+    {
+      "url": "https://plati.market/itm/5422669",
+      "seller": "SpicyCheeze",
+      "tariff": "1 - Месяц | PRO | Без Gemini",
+      "sold": 467,
+      "returns": 1,
+      "price": 170.0
+    },
     {
       "url": "https://plati.market/itm/5979732",
       "seller": "LevelX DZ",
