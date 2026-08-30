@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-30T09:43:10+00:00",
+  "updated_at": "2026-08-30T09:44:49+00:00",
   "plus": [
     {
       "url": "https://plati.market/itm/3725372",
@@ -931,6 +931,14 @@
     }
   ],
   "pro": [
+    {
+      "url": "https://plati.market/itm/5422669",
+      "seller": "SpicyCheeze",
+      "tariff": "1 - Месяц | PRO | Без Gemini",
+      "sold": 467,
+      "returns": 1,
+      "price": 170.0
+    },
     {
       "url": "https://plati.market/itm/4125885",
       "seller": "Будни Дизайнера",
