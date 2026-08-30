@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Сравнение цен на личные тарифы ChatGPT Plus и Pro на Plati.Market">
+  <title>ChatGPT тарифы — Plati.Market</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow"><span></span> PLATI.MARKET MONITOR</p>
+        <h1>Тарифы ChatGPT<br><em>без лишнего шума</em></h1>
+        <p class="lead">Личные Plus и Pro предложения. Точная цена после выбора тарифа, продажи и возвраты — в одной таблице.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="export-button" href="chatgpt_tariffs.xlsx" download>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+          Выгрузить в Excel
+        </a>
+        <p id="updated" class="updated">Обновление данных…</p>
+      </div>
+    </header>
+
+    <section class="dashboard" aria-label="Каталог тарифов">
+      <div class="toolbar">
+        <div class="tabs" role="tablist" aria-label="Тариф">
+          <button class="tab active" role="tab" aria-selected="true" data-plan="plus">Plus <span id="plus-count">—</span></button>
+          <button class="tab" role="tab" aria-selected="false" data-plan="pro">Pro <span id="pro-count">—</span></button>
+        </div>
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
+          <input id="search" type="search" placeholder="Продавец или название тарифа" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="metrics">
+        <article><span>Минимальная цена</span><strong id="min-price">—</strong></article>
+        <article><span>Предложений</span><strong id="offers-count">—</strong></article>
+        <article><span>Продавцов</span><strong id="sellers-count">—</strong></article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Продавец</th><th>Название тарифа</th><th>Продано</th><th>Возвратов</th><th>Цена</th><th></th></tr></thead>
+          <tbody id="offers"></tbody>
+        </table>
+        <div id="empty" class="empty" hidden>По вашему запросу ничего не найдено.</div>
+        <div id="loading" class="loading">Загружаем актуальные предложения…</div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Данные получены через API Digiseller. Цены указаны в рублях и могут меняться.</p>
+      <a href="https://github.com/VasilyPorsev/PlatiMarket">Исходный код на GitHub ↗</a>
+    </footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

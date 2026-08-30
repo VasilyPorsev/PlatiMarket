@@ -5,13 +5,13 @@ import logging
 
 import requests
 
-from .excel import save_excel
 from .scraper import fetch_products, scrape_tariffs
+from .site import save_site
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Сбор цен ChatGPT Plus с Plati.Market в Excel")
-    parser.add_argument("-o", "--output", default="chatgpt_plus.xlsx", help="путь к файлу Excel")
+    parser = argparse.ArgumentParser(description="Обновление сайта с тарифами ChatGPT на Plati.Market")
+    parser.add_argument("--site-dir", default="docs", help="каталог статического сайта")
     parser.add_argument("--query", default="ChatGPT", help="поисковый запрос")
     parser.add_argument("--workers", type=int, default=8, help="число одновременных запросов")
     parser.add_argument("--timeout", type=float, default=30, help="тайм-аут запроса, секунд")
@@ -31,9 +31,9 @@ def main(argv: list[str] | None = None) -> int:
         products = fetch_products(session, args.query, args.timeout, args.max_products)
     log.info("Найдено карточек: %d. Открываю страницы товаров...", len(products))
     plus_offers, pro_offers = scrape_tariffs(products, args.workers, args.timeout, log)
-    path = save_excel(plus_offers, args.output, pro_offers)
+    data_path, excel_path = save_site(plus_offers, pro_offers, args.site_dir)
     log.info(
-        "Предложений Plus: %d, Pro: %d. Файл: %s",
-        len(plus_offers), len(pro_offers), path,
+        "Предложений Plus: %d, Pro: %d. Сайт: %s. Excel: %s",
+        len(plus_offers), len(pro_offers), data_path.parent, excel_path,
     )
     return 0

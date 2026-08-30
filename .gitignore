@@ -1,6 +1,7 @@
 __pycache__/
 *.py[cod]
 *.xlsx
+!docs/chatgpt_tariffs.xlsx
 .venv/
 venv/
 .env
