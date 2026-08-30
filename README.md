@@ -1,2 +1,33 @@
-# PlatiMarket
-Python tool that finds ChatGPT Plus and Pro tariffs on Plati.Market via the Digiseller API and exports sorted prices to Excel.
+# Парсер ChatGPT Plus на Plati.Market
+
+Скрипт получает товары, описания и варианты тарифов из официального API
+Digiseller/Plati.Market, выбирает самые дешёвые явные варианты `ChatGPT Plus`
+и `ChatGPT Pro`, запрашивает цену через endpoint
+пересчёта после выбора каждого тарифа и сохраняет таблицу `Ссылка / Продавец / Название тарифа /
+Продано / Возвратов / Цена` на двух листах — `ChatGPT Plus` и `ChatGPT Pro`.
+Общие тарифы (`общий`, `shared`, `public`) исключаются как по названию тарифа,
+так и по описанию карточки товара. Продажи и возвраты относятся ко всей карточке товара, поскольку
+публичная статистика Plati не разделяет их по вариантам тарифа.
+
+## Установка и запуск
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python main.py
+```
+
+По умолчанию результат записывается в `chatgpt_plus.xlsx`. Примеры:
+
+```powershell
+python main.py --output result.xlsx
+python main.py --workers 12 --timeout 30
+python main.py --max-products 20 --verbose
+```
+
+`--max-products` полезен для быстрой проверки; без него обрабатываются все
+результаты поиска. Цены запрашиваются в рублях и сортируются по возрастанию.
+Сайт может менять разметку — ошибки отдельных карточек выводятся в журнал,
+но не прерывают формирование файла.
+
