@@ -40,4 +40,3 @@ def save_excel(offers: list[Offer], output: str | Path, pro_offers: list[Offer] 
     _fill_sheet(pro_sheet, pro_offers or [])
     workbook.save(path)
     return path
-

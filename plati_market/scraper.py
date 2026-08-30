@@ -437,4 +437,3 @@ def scrape_offers(
 ) -> list[Offer]:
     """Backward-compatible helper returning only Plus offers."""
     return scrape_tariffs(products, workers, timeout, logger)[0]
-

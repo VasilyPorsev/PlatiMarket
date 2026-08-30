@@ -37,4 +37,3 @@ def main(argv: list[str] | None = None) -> int:
         len(plus_offers), len(pro_offers), path,
     )
     return 0
-
