@@ -1,6 +1,9 @@
 const state = { data: { plus: [], pro: [], updated_at: null }, plan: "plus", query: "" };
 const rubles = new Intl.NumberFormat("ru-RU", { style: "currency", currency: "RUB", maximumFractionDigits: 0 });
 const API = "https://api.digiseller.com";
+const CACHE_KEY = "plati-market-tariffs-v2";
+const CACHE_MAX_AGE = 30 * 60 * 1000;
+const { partitionProducts, collectResults, buildNextCache } = RefreshCore;
 const plusPattern = /(?:chat\s*gpt|chatgpt)?\s*plus/i;
 const proPattern = /(?:^|\s)pro(?:\s*x?\s*(?:5|20)|\s*(?:5|20)\s*x)?(?:\s|$)/i;
 const sharedPattern = /(?:общ|совместн|shared|public)/iu;
@@ -160,6 +163,16 @@ async function mapConcurrent(items, concurrency, mapper, onProgress) {
   return results.filter(Boolean);
 }
 
+function loadCache() {
+  try { return JSON.parse(localStorage.getItem(CACHE_KEY))?.records || {}; }
+  catch { return {}; }
+}
+
+function saveCache(records) {
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ records })); }
+  catch (error) { console.warn("Кеш браузера недоступен", error); }
+}
+
 async function refreshFromPlati() {
   const button = document.querySelector("#refresh");
   const updated = document.querySelector("#updated");
@@ -168,11 +181,23 @@ async function refreshFromPlati() {
   try {
     updated.textContent = "Получаем список товаров…";
     const products = await searchProducts();
-    const results = await mapConcurrent(products, 10, fetchProduct, (done, total) => {
-      updated.textContent = `Обновляем тарифы: ${done} из ${total}`;
+    const previousCache = loadCache();
+    const { fresh, stale } = partitionProducts(products, previousCache, Date.now(), CACHE_MAX_AGE);
+    updated.textContent = stale.length
+      ? `Изменились ${stale.length} из ${products.length} товаров`
+      : `Все ${products.length} товаров актуальны`;
+    const refreshed = await mapConcurrent(stale, 20, async product => ({
+      product,
+      result: await fetchProduct(product),
+    }), (done, total) => {
+      updated.textContent = `Обновляем изменённые товары: ${done} из ${total}`;
     });
-    const plus = results.flatMap(item => item.plus ? [item.plus] : []).sort((a, b) => a.price - b.price);
-    const pro = results.flatMap(item => item.pro ? [item.pro] : []).sort((a, b) => a.price - b.price);
+    const refreshedById = new Map(refreshed.map(item => [String(item.product.product_id), item.result]));
+    const checkedAt = Date.now();
+    const staleIds = new Set(stale.map(product => String(product.product_id)));
+    const nextCache = buildNextCache(products, previousCache, refreshedById, staleIds, checkedAt);
+    saveCache(nextCache);
+    const { plus, pro } = collectResults([...fresh, ...refreshed.map(item => item.result)]);
     state.data = { plus, pro, updated_at: new Date().toISOString() };
     updated.textContent = `Обновлено ${new Date().toLocaleString("ru-RU")}`;
     document.querySelector("#loading")?.remove();
